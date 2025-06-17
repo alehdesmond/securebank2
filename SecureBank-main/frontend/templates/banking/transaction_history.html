@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+{% block title %}Transaction History{% endblock %}
+{% block content %}
+<div class="container py-5">
+    <div class="card">
+        <div class="card-header">
+            <h4>Transaction History</h4>
+        </div>
+        <div class="card-body">
+            <ul class="list-group">
+                {% for transaction in transactions %}
+                <li class="list-group-item">
+                    <strong>{{ transaction.get_transaction_type_display }}</strong> -
+                    ₣CFA {{ transaction.amount|floatformat:2 }} -
+                    {{ transaction.get_status_display }} -
+                    {{ transaction.created_at|date:"M d, Y H:i" }}
+                </li>
+                {% empty %}
+                <li class="list-group-item">No transactions found.</li>
+                {% endfor %}
+            </ul>
+            <a href="{% url 'banking:dashboard' %}" class="btn btn-primary mt-3">Back to Dashboard</a>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,87 @@
+.dashboard {
+  font-family: 'Segoe UI', sans-serif;
+  padding: 1rem;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.avatar {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+}
+
+.account-card {
+  background: #800020;
+  color: white;
+  border-radius: 12px;
+  padding: 1rem;
+  margin: 1rem 0;
+}
+
+.account p.balance {
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+.actions {
+  display: flex;
+  justify-content: space-between;
+  margin: 1rem 0;
+}
+
+.action-btn {
+  background: #800020;
+  color: white;
+  padding: 0.8rem;
+  border-radius: 8px;
+  text-align: center;
+  flex: 1;
+  margin: 0 0.2rem;
+  text-decoration: none;
+}
+
+.transactions {
+  background: #f9f9f9;
+  padding: 1rem;
+  border-radius: 12px;
+}
+
+.transaction {
+  display: flex;
+  justify-content: space-between;
+  padding: 0.5rem 0;
+}
+
+.positive {
+  color: green;
+}
+.negative {
+  color: red;
+}
+
+/* ✅ Added classes */
+.btn-maroon {
+  background-color: #800020;
+  color: white;
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 6px;
+  text-decoration: none;
+  display: inline-block;
+  text-align: center;
+}
+
+.btn-maroon:hover {
+  background-color: #a61e30;
+  color: white;
+}
+
+.bg-maroon {
+  background-color: #800020 !important;
+  color: white;
+}

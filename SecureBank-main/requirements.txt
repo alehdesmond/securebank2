@@ -1,0 +1,38 @@
+# Core Django
+Django==5.0.2
+
+# Security Packages
+django-axes==6.3.0  # For login attempt tracking and blocking
+django-csp==3.7  # For Content Security Policy
+django-secure==1.0.2  # For security middleware
+django-session-timeout==0.1.0  # For session management
+django-password-validators==1.7.3  # For password validation
+django-two-factor-auth==1.16.0  # For 2FA
+django-ratelimit==4.1.0  # For rate limiting
+
+# Authentication & Authorization
+django-allauth==0.60.1  # For enhanced authentication
+django-oauth-toolkit==2.3.0  # For OAuth2
+django-cors-headers==4.3.1  # For CORS handling
+
+# Database and Encryption
+psycopg2-binary==2.9.9  # For PostgreSQL
+cryptography==42.0.2  # For encryption
+python-dotenv==1.0.1  # For environment variables
+
+# Forms and Frontend
+django-crispy-forms==2.1  # For better form rendering
+crispy-bootstrap5==2023.10  # Bootstrap 5 template pack
+whitenoise==6.6.0  # For static file serving
+
+# Monitoring and Logging
+django-debug-toolbar==4.3.0  # For debugging (development only)
+sentry-sdk==1.40.4  # For error tracking
+
+# Testing and Development
+pytest==8.0.0
+pytest-django==4.8.0
+coverage==7.4.1
+
+# Production Server
+gunicorn==21.2.0  # Production server 

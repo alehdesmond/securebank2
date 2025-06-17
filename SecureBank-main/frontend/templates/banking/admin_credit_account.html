@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+{% block title %}Admin Credit Account{% endblock %}
+{% block content %}
+<div class="container py-5">
+    <h3>Credit User Account (Admin Only)</h3>
+    <form method="post">
+        {% csrf_token %}
+        <div class="mb-3">
+            <label for="phone_number" class="form-label">User Phone Number</label>
+            <input type="text" name="phone_number" id="phone_number" class="form-control" required>
+        </div>
+        <div class="mb-3">
+            <label for="amount" class="form-label">Amount to Credit</label>
+            <input type="number" name="amount" id="amount" class="form-control" min="1" required>
+        </div>
+        <button type="submit" class="btn btn-success">Credit Account</button>
+    </form>
+</div>
+{% endblock %}

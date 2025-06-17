@@ -1,0 +1,64 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Dashboard</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-blue-50 font-sans">
+
+    <div class="p-6">
+        <div class="flex justify-between items-center">
+            <h1 class="text-2xl font-bold">Hi, {{ request.user.first_name }}</h1>
+            <img src="{% static 'img/avatar.jpg' %}" class="w-10 h-10 rounded-full" alt="Profile">
+        </div>
+
+        <!-- Account Carousel -->
+        <div class="mt-6 bg-red-800 text-white rounded-lg p-4">
+            {% for account in accounts %}
+            <div class="mb-2">
+                <h2 class="text-lg font-semibold">{{ account.account_type }}</h2>
+                <p>****{{ account.account_number|slice:"-4:" }}</p>
+                <p class="text-xl font-bold">${{ account.balance }}</p>
+                <p class="text-sm text-gray-200">Available</p>
+            </div>
+            {% endfor %}
+        </div>
+
+        <!-- Quick Actions -->
+        <div class="grid grid-cols-4 gap-4 mt-6 text-center text-white">
+            <a href="{% url 'banking:transfer_money' %}" class="bg-red-800 rounded-lg py-4">
+                <div>Transfer</div>
+            </a>
+            <a href="#" class="bg-red-800 rounded-lg py-4">
+                <div>Deposit</div>
+            </a>
+            <a href="#" class="bg-red-800 rounded-lg py-4">
+                <div>Pay</div>
+            </a>
+            <a href="#" class="bg-red-800 rounded-lg py-4">
+                <div>Message</div>
+            </a>
+        </div>
+
+        <!-- Transactions -->
+        <div class="mt-8">
+            <h2 class="text-lg font-semibold mb-4">Transactions</h2>
+            <div class="bg-white rounded-lg shadow">
+                {% for txn in recent_transactions %}
+                <div class="flex justify-between border-b p-4">
+                    <div>
+                        <p class="font-semibold">{{ txn.description }}</p>
+                        <p class="text-sm text-gray-600">{{ txn.created_at|date:"M d" }}, {{ txn.from_account.account_type }}</p>
+                    </div>
+                    <div class="font-semibold {% if txn.transaction_type == 'DEPOSIT' or txn.transaction_type == 'CREDIT' %}text-green-600{% else %}text-black{% endif %}">
+                        {% if txn.transaction_type == 'DEPOSIT' or txn.transaction_type == 'CREDIT' %}+{% endif %}${{ txn.amount }}
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</body>
+</html>

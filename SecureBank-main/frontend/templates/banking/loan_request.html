@@ -1,0 +1,14 @@
+<!-- ...existing code... -->
+<h1>Request a Loan</h1>
+<form method="post" action="{% url 'banking:loan_request' %}">
+    {% csrf_token %}
+    <label for="amount">Amount:</label>
+    <input type="number" name="amount" id="amount" required>
+    <br>
+    <label for="term">Term (months):</label>
+    <input type="number" name="term" id="term" required>
+    <br>
+    <button type="submit">Submit Request</button>
+</form>
+<a href="{% url 'banking:loan_history' %}">View Loan History</a>
+<!-- ...existing code... -->

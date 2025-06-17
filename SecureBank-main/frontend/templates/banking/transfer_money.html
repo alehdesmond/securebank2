@@ -1,0 +1,76 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+
+{% block title %}Transfer Money{% endblock %}
+
+{% block content %}
+<div class="container py-4">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card shadow-sm">
+                <div class="card-header">
+                    <h5 class="card-title mb-0">Transfer Money</h5>
+                </div>
+                <div class="card-body">
+
+                    <!-- Show Django messages -->
+                    {% if messages %}
+                        {% for message in messages %}
+                            <div class="alert alert-{{ message.tags }}">
+                                {{ message }}
+                            </div>
+                        {% endfor %}
+                    {% endif %}
+
+                    <!-- Form Section -->
+                    {% if user.is_authenticated %}
+                        <form method="post" novalidate>
+                            {% csrf_token %}
+
+                            <div class="mb-3">
+                                <label for="phone_number" class="form-label">Recipient Phone Number</label>
+                                <input type="text" name="phone_number" id="phone_number" class="form-control"
+                                       placeholder="e.g. 6XXXXXXXX" pattern="^6\d{8}$" required>
+                                <small class="form-text text-muted">Enter a 9-digit valid Cameroon number starting with 6.</small>
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="amount" class="form-label">Amount to Transfer</label>
+                                <div class="input-group">
+                                    <span class="input-group-text">FCFA</span>
+                                    <input type="number" name="amount" id="amount" class="form-control"
+                                           min="100" step="100" required placeholder="Amount to transfer">
+                                </div>
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="password" class="form-label">Your Password</label>
+                                <input type="password" name="password" id="password" class="form-control"
+                                       placeholder="Confirm your password" required>
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="description" class="form-label">Transfer Note (optional)</label>
+                                <textarea name="description" id="description" class="form-control" rows="2"
+                                          placeholder="Reason or note for the transfer (optional)"></textarea>
+                            </div>
+
+                            <div class="d-grid gap-2">
+                                <button type="submit" class="btn btn-primary">Submit Transfer</button>
+                                <a href="{% url 'banking:dashboard' %}" class="btn btn-outline-secondary">Cancel</a>
+                            </div>
+                        </form>
+                    {% else %}
+                        <div class="alert alert-danger text-center">
+                            You must be logged in to make a transfer.
+                            <br><br>
+                            <a href="{% url 'login' %}" class="btn btn-primary">Login</a>
+                        </div>
+                    {% endif %}
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

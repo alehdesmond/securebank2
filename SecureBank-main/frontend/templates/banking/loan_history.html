@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+{% block title %}Loan History{% endblock %}
+
+{% block content %}
+<h2>Your Loan Requests</h2>
+{% if loans %}
+    <ul class="list-group">
+        {% for loan in loans %}
+        <li class="list-group-item d-flex justify-content-between">
+            <span>₣CFA {{ loan.amount }}</span>
+            <span>Status: {{ loan.get_status_display }}</span>
+            <span class="text-muted">{{ loan.requested_at|date:"M d, Y" }}</span>
+        </li>
+        {% endfor %}
+    </ul>
+{% else %}
+    <p class="text-muted">No loan requests found.</p>
+{% endif %}
+<a href="{% url 'banking:loan_request' %}" class="btn btn-primary mt-3">Request Another Loan</a>
+{% endblock %}

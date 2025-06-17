@@ -1,0 +1,52 @@
+<!-- filepath: frontend/templates/banking/manager_dashboard.html -->
+{% extends 'base.html' %}
+{% block title %}Manager Dashboard{% endblock %}
+{% block content %}
+<div class="container py-4">
+    <h2>Manager Dashboard</h2>
+
+    <h4>Pending Accounts</h4>
+    <ul>
+        {% for account in pending_accounts %}
+            <li>
+                {{ account.user.username }} - {{ account.account_number }} ({{ account.account_type }})
+                [<a href="{% url 'banking:account_detail' account.id %}">Review</a>]
+            </li>
+        {% empty %}
+            <li>No pending accounts.</li>
+        {% endfor %}
+    </ul>
+
+    <h4>Pending Loans</h4>
+    <ul>
+        {% for loan in pending_loans %}
+            <li>
+                {{ loan.account.user.username }} - {{ loan.amount }} FCFA
+                [<a href="{% url 'banking:loan_change' loan.id %}">Review</a>]
+            </li>
+        {% empty %}
+            <li>No pending loans.</li>
+        {% endfor %}
+    </ul>
+
+    <h4>All Customers</h4>
+    <ul>
+        {% for account in customers %}
+            <li>
+                {{ account.user.username }} - {{ account.account_number }} ({{ account.status }})
+                [<a href="{% url 'banking:account_detail' account.id %}">Details</a>]
+            </li>
+        {% endfor %}
+    </ul>
+
+    <h4>Recent Transactions</h4>
+    <ul>
+        {% for transaction in transactions %}
+            <li>
+                {{ transaction.created_at }} - {{ transaction.transaction_type }} - {{ transaction.amount }} FCFA
+                ({{ transaction.status }})
+            </li>
+        {% endfor %}
+    </ul>
+</div>
+{% endblock %}

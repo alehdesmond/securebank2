@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+
+{% block title %}Transfer Confirmation{% endblock %}
+
+{% block content %}
+<div class="container py-5">
+    <div class="row justify-content-center">
+        <div class="col-md-7">
+            <div class="card shadow">
+                <div class="card-header bg-success text-white">
+                    <h4 class="mb-0">Transfer Successful</h4>
+                </div>
+                <div class="card-body">
+                    <p class="lead mb-4">Your transfer was completed successfully!</p>
+                    <ul class="list-group mb-4">
+                        <li class="list-group-item">
+                            <strong>Recipient:</strong> {{ recipient.user.get_full_name|default:recipient.user.username }}
+                        </li>
+                        <li class="list-group-item">
+                            <strong>Recipient Phone:</strong> {{ recipient.phone_number }}
+                        </li>
+                        <li class="list-group-item">
+                            <strong>Amount:</strong> ₣CFA {{ amount|floatformat:2 }}
+                        </li>
+                        <li class="list-group-item">
+                            <strong>Reference Number:</strong> {{ reference }}
+                        </li>
+                    </ul>
+                    <a href="{% url 'banking:dashboard' %}" class="btn btn-primary">Back to Dashboard</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
